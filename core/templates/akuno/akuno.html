@@ -1,0 +1,1512 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AKUNO Solar - Solar Energy Solutions</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #F4B400;
+      --primary-light: #FFC107;
+      --primary-dark: #F09700;
+      --deep-blue: #1F3C88;
+      --blue-mid: #2E4F9E;
+      --blue-light: #3D5FA8;
+      --bg-light: #F8FAFC;
+      --bg-lighter: #FFFFFF;
+      --white: #FFFFFF;
+      --text-muted: #647A8F;
+    }
+
+    html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg-light); color: var(--deep-blue); }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    .page { display: none; min-height: 100%; flex-direction: column; }
+    .page.active { display: flex; }
+
+    /* NAV */
+    nav {
+      background: var(--deep-blue);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(31,60,136,0.2);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    .nav-logo span { color: var(--white); font-size: 0.8rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; display: block; line-height: 1; margin-top: 2px; }
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+    .nav-links a {
+      color: #A5B8D8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .nav-links a:hover, .nav-links a.active-link {
+      color: var(--primary);
+      background: rgba(244,180,0,0.12);
+    }
+    .nav-cta {
+      background: var(--primary);
+      color: var(--deep-blue) !important;
+      font-weight: 600 !important;
+      padding: 0.5rem 1.2rem !important;
+    }
+    .nav-cta:hover { background: var(--primary-light) !important; color: var(--deep-blue) !important; }
+
+    .hamburger { display: none; background: none; border: none; color: var(--primary); cursor: pointer; padding: 0.5rem; }
+    .mobile-menu { display: none; background: var(--blue-mid); padding: 1rem 2rem; flex-direction: column; gap: 0.25rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #A5B8D8; text-decoration: none; padding: 0.6rem 0.5rem; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .mobile-menu a:hover, .mobile-menu a.active-link { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* BUTTONS */
+    .btn-gold {
+      background: var(--primary);
+      color: var(--deep-blue);
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    .btn-gold:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(244,180,0,0.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5);
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* SECTION HEADER */
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--deep-blue); line-height: 1.25; }
+    .section-subtitle { color: var(--text-muted); font-size: 1rem; margin-top: 0.75rem; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+
+    /* DIVIDER */
+    .gold-divider { width: 56px; height: 3px; background: var(--primary); border-radius: 2px; margin: 1rem auto 0; }
+
+    /* CARDS */
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(31,60,136,0.08);
+      transition: all 0.3s;
+      border: 1px solid rgba(31,60,136,0.05);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(31,60,136,0.15); }
+
+    /* FOOTER */
+    footer {
+      background: var(--deep-blue);
+      color: #8FA7C8;
+      margin-top: auto;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 3.5rem 2rem 2rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2.5rem; }
+    .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary); margin-bottom: 0.75rem; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; color: #718096; }
+    .footer-col h4 { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); margin-bottom: 1.1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-col ul a { color: #718096; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--primary); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 1.25rem 2rem; text-align: center; font-size: 0.82rem; color: #4A5568; max-width: 1200px; margin: 0 auto; }
+
+    @media (max-width: 900px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+
+    /* SCROLL WRAPPER */
+    .page-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; }
+
+    /* ==================== HOME PAGE ==================== */
+    .hero {
+      background: linear-gradient(135deg, var(--deep-blue) 0%, var(--blue-mid) 100%);
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 70% 50%, rgba(244,180,0,0.1) 0%, transparent 60%),
+        repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(244,180,0,0.15); border: 1px solid rgba(244,180,0,0.3); border-radius: 50px; padding: 0.4rem 1rem; font-size: 0.78rem; font-weight: 600; color: var(--primary); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); color: var(--white); line-height: 1.2; margin-bottom: 1.25rem; }
+    .hero h1 em { font-style: normal; color: var(--primary); }
+    .hero p { color: #94A3B8; font-size: 1.05rem; line-height: 1.75; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-stats { display: flex; gap: 2rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .stat-item h3 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); line-height: 1; }
+    .stat-item p { font-size: 0.8rem; color: #64748B; margin-top: 0.25rem; }
+    .hero-visual { display: flex; align-items: center; justify-content: center; }
+    .hero-card-stack { position: relative; width: 340px; height: 360px; }
+    .hero-card-back, .hero-card-front {
+      position: absolute; border-radius: 16px; padding: 2rem;
+    }
+    .hero-card-back { width: 280px; height: 300px; background: var(--navy-light); bottom: 0; right: 0; border: 1px solid rgba(201,168,76,0.2); }
+    .hero-card-front { width: 280px; height: 300px; background: linear-gradient(135deg, var(--navy-mid), var(--navy-light)); top: 0; left: 0; border: 1px solid rgba(201,168,76,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .hero-card-front h4 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.1rem; margin-bottom: 1rem; }
+    .hero-card-metric { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.6rem; }
+    .hero-card-metric span { font-size: 0.82rem; color: #94A3B8; }
+    .hero-card-metric strong { color: var(--gold); font-size: 0.9rem; }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+    }
+
+    .home-section { padding: 5rem 2rem; }
+    .home-section-inner { max-width: 1200px; margin: 0 auto; }
+
+    /* SERVICE PREVIEW */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .service-mini-card { background: var(--white); border-radius: 12px; padding: 2rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: all 0.3s; cursor: default; }
+    .service-mini-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-color: rgba(201,168,76,0.3); }
+    .service-icon { width: 52px; height: 52px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .service-icon svg { width: 24px; height: 24px; stroke: var(--navy); }
+    .service-mini-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--navy); }
+    .service-mini-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; }
+
+    @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+
+    /* TESTIMONIALS */
+    .testimonials-bg { background: var(--navy); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.75rem; }
+    .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+    .testimonial-card p { font-size: 0.9rem; color: #94A3B8; line-height: 1.7; font-style: italic; margin-bottom: 1.25rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+    .author-info h5 { font-size: 0.88rem; font-weight: 600; color: var(--white); font-family: 'DM Sans', sans-serif; }
+    .author-info span { font-size: 0.78rem; color: #64748B; }
+
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+    /* WHY US */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .why-image-block { position: relative; }
+    .why-image-box { background: var(--navy); border-radius: 16px; padding: 3rem; min-height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .why-image-box::before { content: ''; position: absolute; top: -30px; left: -30px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.15), transparent 70%); }
+    .why-big-icon { width: 120px; height: 120px; background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05)); border: 2px solid rgba(201,168,76,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .why-big-icon svg { width: 56px; height: 56px; stroke: var(--gold); }
+    .why-badge-corner { position: absolute; bottom: 1.5rem; right: 1.5rem; background: var(--gold); color: var(--navy); border-radius: 10px; padding: 0.75rem 1.25rem; text-align: center; }
+    .why-badge-corner strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.5rem; line-height: 1; }
+    .why-badge-corner span { font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; }
+    .why-points { display: flex; flex-direction: column; gap: 1.25rem; }
+    .why-point { display: flex; gap: 1rem; align-items: flex-start; }
+    .why-check { width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .why-check svg { width: 14px; height: 14px; stroke: var(--gold); }
+    .why-point h4 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; font-family: 'DM Sans', sans-serif; }
+    .why-point p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+    @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } .why-image-block { display: none; } }
+
+    /* CTA BANNER */
+    .cta-banner { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); border-radius: 16px; padding: 3.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .cta-banner h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--navy); margin-bottom: 0.5rem; }
+    .cta-banner p { color: rgba(13,27,42,0.7); font-size: 0.95rem; }
+    .btn-navy { background: var(--navy); color: var(--white); border: none; padding: 0.85rem 2rem; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-navy:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+    /* ==================== SERVICES PAGE ==================== */
+    .page-hero { background:var(--navy); padding: 5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 80%, rgba(201,168,76,0.1) 0%, transparent 60%); }
+    .page-hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-hero h1 { color: var(--white); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+    .page-hero p { color: #94A3B8; font-size: 1.05rem; line-height: 1.7; }
+    .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.25rem; font-size: 0.8rem; color: #64748B; }
+    .breadcrumb span { color: var(--gold); }
+
+    .services-full-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .service-full-card { background: var(--white); border-radius: 14px; padding: 2.25rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 16px rgba(0,0,0,0.05); transition: all 0.3s; }
+    .service-full-card:hover { border-color: rgba(201,168,76,0.4); box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-3px); }
+    .service-full-card .service-icon { margin-bottom: 1.5rem; }
+    .service-full-card h3 { font-size: 1.2rem; color: var(--navy); margin-bottom: 0.75rem; }
+    .service-full-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .service-tag { background: rgba(201,168,76,0.1); color: var(--gold-dark); font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.75rem; border-radius: 50px; }
+
+    @media (max-width: 768px) { .services-full-grid { grid-template-columns: 1fr; } }
+
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .process-step { text-align: center; padding: 2rem 1.25rem; }
+    .step-num { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--navy); }
+    .process-step h4 { font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .process-step p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; }
+
+    @media (max-width: 768px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 460px) { .process-grid { grid-template-columns: 1fr; } }
+
+    /* ==================== GALLERY PAGE ==================== */
+    .gallery-filters { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .filter-btn { background: var(--white); border: 1.5px solid rgba(0,0,0,0.1); color: var(--navy); padding: 0.5rem 1.2rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 600; }
+
+    .gallery-grid { columns: 3; column-gap: 1.25rem; }
+    .gallery-item { break-inside: avoid; margin-bottom: 1.25rem; border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; background: var(--navy-light); }
+    .gallery-item .gallery-visual { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--navy), var(--navy-light)); border-radius: 12px; transition: all 0.3s; }
+    .gallery-item:hover .gallery-visual { filter: brightness(0.7); }
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(13,27,42,0.7); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.5rem; border-radius: 12px; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { color: var(--white); font-size: 0.85rem; font-weight: 500; }
+    .gallery-overlay .zoom-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; }
+    .gallery-overlay .zoom-icon svg { width: 20px; height: 20px; stroke: var(--navy); }
+    .gallery-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.25rem 1rem 0.75rem; background: linear-gradient(transparent, rgba(0,0,0,0.6)); color: var(--white); font-size: 0.82rem; font-weight: 500; }
+
+    @media (max-width: 900px) { .gallery-grid { columns: 2; } }
+    @media (max-width: 560px) { .gallery-grid { columns: 1; } }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 999; display: none; align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox-content { background: var(--navy); border-radius: 16px; max-width: 700px; width: 100%; padding: 2.5rem; position: relative; }
+    .lightbox-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1); border: none; color: var(--white); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .lightbox-close:hover { background: var(--gold); color: var(--navy); }
+    .lightbox-visual { border-radius: 10px; overflow: hidden; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 280px; }
+    .lightbox-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); margin-bottom: 0.5rem; }
+    .lightbox-desc { font-size: 0.88rem; color: #94A3B8; line-height: 1.65; }
+
+    /* ==================== ABOUT PAGE ==================== */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-image-block { position: relative; }
+    .about-main-visual { background: linear-gradient(135deg, var(--navy), var(--navy-light)); border-radius: 16px; min-height: 420px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .about-main-visual::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 60%, rgba(201,168,76,0.12) 0%, transparent 60%); }
+    .about-icon-big { width: 140px; height: 140px; border-radius: 50%; border: 3px solid rgba(201,168,76,0.4); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+    .about-icon-big svg { width: 70px; height: 70px; stroke: var(--gold); }
+    .exp-badge { position: absolute; bottom: 1.5rem; right: -1rem; background: var(--gold); color: var(--navy); padding: 1rem 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+    .exp-badge strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.8rem; line-height: 1; }
+    .exp-badge span { font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; white-space: nowrap; }
+
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .about-image-block { display: none; } }
+
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .value-card { text-align: center; padding: 2.25rem 1.75rem; background: var(--white); border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+    .value-icon { width: 56px; height: 56px; background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)); border: 2px solid rgba(201,168,76,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+    .value-icon svg { width: 24px; height: 24px; stroke: var(--gold); }
+    .value-card h3 { font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .value-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+
+    @media (max-width: 768px) { .values-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 460px) { .values-grid { grid-template-columns: 1fr; } }
+
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .team-card { text-align: center; }
+    .team-avatar { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy-light)); border: 3px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+    .team-card h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .team-card span { font-size: 0.8rem; color: var(--gold); font-weight: 500; }
+    .team-card p { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.55; }
+
+    @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 460px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+
+    /* ==================== CONTACT PAGE ==================== */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; }
+    .contact-info-card { background: var(--navy); border-radius: 14px; padding: 2.5rem; }
+    .contact-info-card h3 { font-size: 1.3rem; color: var(--white); margin-bottom: 0.5rem; }
+    .contact-info-card > p { color: #64748B; font-size: 0.88rem; line-height: 1.65; margin-bottom: 2rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+    .contact-item-icon { width: 44px; height: 44px; min-width: 44px; background: rgba(201,168,76,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .contact-item-icon svg { width: 20px; height: 20px; stroke: var(--gold); }
+    .contact-item h5 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #64748B; margin-bottom: 0.2rem; font-family: 'DM Sans', sans-serif; }
+    .contact-item p { font-size: 0.9rem; color: #94A3B8; }
+    .social-row { display: flex; gap: 0.75rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .social-btn { width: 40px; height: 40px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+    .social-btn:hover { background: var(--gold); border-color: var(--gold); }
+    .social-btn svg { width: 18px; height: 18px; stroke: #94A3B8; }
+    .social-btn:hover svg { stroke: var(--navy); }
+
+    .contact-form-card { background: var(--white); border-radius: 14px; padding: 2.5rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+    .contact-form-card h3 { font-size: 1.3rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .contact-form-card > p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.75rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--navy); letter-spacing: 0.3px; }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1.5px solid rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--navy);
+      background: var(--cream);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+      background: var(--white);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-success { display: none; text-align: center; padding: 2rem; }
+    .form-success svg { width: 56px; height: 56px; stroke: var(--gold); margin-bottom: 1rem; }
+    .form-success h4 { font-size: 1.2rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .form-success p { font-size: 0.88rem; color: var(--text-muted); }
+
+    @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* MAPS / HOURS */
+    .map-hours-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .map-placeholder { background: var(--navy); border-radius: 12px; min-height: 260px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .map-placeholder::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 41px); }
+    .map-pin { position: relative; z-index: 1; text-align: center; }
+    .map-pin svg { width: 40px; height: 40px; stroke: var(--gold); }
+    .map-pin p { color: #94A3B8; font-size: 0.82rem; margin-top: 0.5rem; }
+    .hours-card { background: var(--white); border-radius: 12px; padding: 1.75rem; border: 1px solid rgba(0,0,0,0.05); }
+    .hours-card h4 { font-size: 1rem; color: var(--navy); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; font-size: 0.85rem; }
+    .hours-row span:first-child { color: var(--text-muted); }
+    .hours-row span:last-child { color: var(--navy); font-weight: 500; }
+    .hours-row.closed span:last-child { color: #CBD5E0; }
+
+    @media (max-width: 768px) { .map-hours-grid { grid-template-columns: 1fr; } }
+
+    /* ANIMATION */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.5s ease forwards; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image Preview">
+   <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i data-lucide="x"></i></button>
+    <div class="lightbox-visual" id="lightboxVisual"></div>
+    <h3 class="lightbox-title" id="lightboxTitle"></h3>
+    <p class="lightbox-desc" id="lightboxDesc"></p>
+   </div><!-- WHATSAPP FLOATING BUTTON --> <a href="https://wa.me/27672104806?text=Hello%20AKUNO%20Solar%2C%20I%27m%20interested%20in%20your%20services" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Contact us on WhatsApp" style="position:fixed;bottom:2rem;right:2rem;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(37,211,102,0.4);z-index:999;transition:all 0.3s;text-decoration:none;"> <i data-lucide="send" style="width:24px;height:24px;color:white;"></i> </a>
+   <script>
+    const whatsappBtn = document.querySelector('.whatsapp-btn');
+    whatsappBtn.addEventListener('mouseover', function() {
+      this.style.transform = 'scale(1.1)';
+      this.style.boxShadow = '0 6px 20px rgba(37,211,102,0.6)';
+    });
+    whatsappBtn.addEventListener('mouseout', function() {
+      this.style.transform = 'scale(1)';
+      this.style.boxShadow = '0 4px 12px rgba(37,211,102,0.4)';
+    });
+  </script>
+  </div><!-- ===================== PAGE: HOME ===================== -->
+  <div class="page active" id="page-home">
+   <nav>
+    <div class="nav-logo" onclick="navigate('home')">
+     AKUNO<span>Solar</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+     <li><a href="#" class="active-link" onclick="navigate('home');return false;">Home</a></li>
+     <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+     <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+     <li><a href="#" onclick="navigate('about');return false;">About</a></li>
+     <li><a href="#" class="nav-cta" onclick="navigate('contact');return false;">Contact Us</a></li>
+    </ul><button class="hamburger" id="hamburger" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+   </nav>
+   <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="navigate('home');closeMobile();return false;">Home</a> <a href="#" onclick="navigate('services');closeMobile();return false;">Services</a> <a href="#" onclick="navigate('gallery');closeMobile();return false;">Gallery</a> <a href="#" onclick="navigate('about');closeMobile();return false;">About</a> <a href="#" onclick="navigate('contact');closeMobile();return false;">Contact Us</a>
+   </div>
+   <div class="page-scroll">
+    <!-- HERO -->
+    <section class="hero">
+     <div class="hero-bg-pattern"></div>
+     <div class="hero-inner">
+      <div class="hero-content fade-in">
+       <div class="hero-badge"><i data-lucide="award" style="width:14px;height:14px;"></i> Trusted by 500+ Clients
+       </div>
+       <h1 id="heroTitle">POWERING THE FUTURE WITH <em>SOLAR ENERGY</em></h1>
+       <p id="heroSubtitle">We are a solar energy company registered with the government of South Africa, dedicated to providing innovative, reliable and cost-effective solutions for homes, businesses and communities.</p>
+       <div class="hero-actions">
+        <button class="btn-gold" onclick="navigate('services')"><i data-lucide="arrow-right" style="width:16px;height:16px;"></i> Our Services</button> <button class="btn-outline" onclick="navigate('contact')">Get a Free Quote</button>
+       </div>
+       <div class="hero-stats">
+        <div class="stat-item">
+         <h3>15+</h3>
+         <p>Years Experience</p>
+        </div>
+        <div class="stat-item">
+         <h3>500+</h3>
+         <p>Projects Done</p>
+        </div>
+        <div class="stat-item">
+         <h3>98%</h3>
+         <p>Client Satisfaction</p>
+        </div>
+       </div>
+      </div>
+      <div class="hero-visual">
+       <div class="hero-card-stack">
+        <div class="hero-card-back"></div>
+        <div class="hero-card-front">
+         <h4>Performance Overview</h4>
+         <div class="hero-card-metric"><span>Client Retention</span><strong>98.2%</strong>
+         </div>
+         <div class="hero-card-metric"><span>Projects Delivered</span><strong>500+</strong>
+         </div>
+         <div class="hero-card-metric"><span>Team Members</span><strong>42</strong>
+         </div>
+         <div class="hero-card-metric"><span>Awards Won</span><strong>18</strong>
+         </div>
+         <div class="hero-card-metric"><span>Countries Served</span><strong>12</strong>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- SERVICES PREVIEW -->
+    <section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="section-header">
+       <span class="section-eyebrow">What We Do</span>
+       <h2 class="section-title">Our Core Services</h2>
+       <div class="gold-divider"></div>
+       <p class="section-subtitle">Comprehensive solar solutions designed to help you harness clean energy efficiently, save costs, and power a sustainable future.</p>
+      </div>
+      <div class="services-grid">
+       
+       {% for item in services|slice:":3" %}
+       <div class="service-mini-card">
+        <div class="service-icon"><i data-lucide="sun"></i>
+        </div>
+        <h3>{{item.title}}</h3>
+        <p>{{item.description}}</p>
+       </div>
+       {% endfor %}
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;">
+       <button class="btn-gold" onclick="navigate('services')">View All Services <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>
+      </div>
+     </div>
+    </section><!-- WHY US -->
+    <section class="home-section" style="background:var(--white);">
+     <div class="home-section-inner">
+      <div class="why-grid">
+       <div class="why-image-block">
+        <div class="why-image-box" style="position:relative;">
+         <div style="position: absolute;inset: 0;border-radius: 16px;background: radial-gradient(circle at 50%, rgba(201,168,76,0.1), transparent 70%),url('{% static 'img/about.jpeg'%}') no-repeat center/cover;"></div>
+         <div class="why-big-icon"><i data-lucide="briefcase"></i>
+         </div>
+         <div class="why-badge-corner"><strong>10+</strong><span>YRS EXPERTISE</span>
+         </div>
+        </div>
+       </div>
+       <div>
+        <span class="section-eyebrow">Why Choose AKUNO</span>
+        <h2 class="section-title" style="text-align:left;margin-bottom:0.5rem;">Leading Solar<br>
+          Solutions in Malawi</h2>
+        <div class="gold-divider" style="margin:0.75rem 0 1.75rem;"></div>
+        <div class="why-points">
+         <div class="why-point">
+          <div class="why-check"><i data-lucide="check"></i>
+          </div>
+          <div>
+           <h4>Government Registered</h4>
+           <p>Officially registered and certified as a solar energy company with the Government of South Africa.</p>
+          </div>
+         </div>
+         <div class="why-point">
+          <div class="why-check"><i data-lucide="check"></i>
+          </div>
+          <div>
+           <h4>Innovative Solutions</h4>
+           <p>We utilize the latest solar technology and design practices to maximize energy efficiency and savings.</p>
+          </div>
+         </div>
+         <div class="why-point">
+          <div class="why-check"><i data-lucide="check"></i>
+          </div>
+          <div>
+           <h4>Cost-Effective Services</h4>
+           <p>Competitive pricing without compromising on quality, ensuring exceptional value for every project.</p>
+          </div>
+         </div>
+         <div class="why-point">
+          <div class="why-check"><i data-lucide="check"></i>
+          </div>
+          <div>
+           <h4>Comprehensive Support</h4>
+           <p>From design through installation to maintenance, we provide complete support for homes, businesses and communities.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- TESTIMONIALS -->
+    <section class="home-section testimonials-bg">
+     <div class="home-section-inner">
+      <div class="section-header">
+       <span class="section-eyebrow" style="color:var(--gold);">Client Stories</span>
+       <h2 class="section-title" style="color:var(--white);">What Our Clients Say</h2>
+       <div class="gold-divider"></div>
+      </div>
+      <div class="testimonials-grid">
+
+        {% for item in testimonials %}
+       <div class="testimonial-card">
+        <div class="stars">
+         ★★★★★
+        </div>
+        <p>{{item.message}}</p>
+        <div class="testimonial-author">
+         <div class="avatar">
+             <img style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover;" src="{% static 'img/about.jpeg'%}" alt="Profile">
+           </div>
+         <div class="author-info">
+          <h5>{{item.name}}</h5><span>{{item.role}}</span>
+         </div>
+        </div>
+       </div>
+       {% endfor %}
+      </div>
+     </div>
+    </section><!-- CTA BANNER -->
+    <section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="cta-banner">
+       <div>
+        <h2 id="ctaTitle">Ready to Elevate Your Business?</h2>
+        <p>Contact us today for a free, no-obligation consultation with our senior team.</p>
+       </div><button class="btn-navy" onclick="navigate('contact')"><i data-lucide="send" style="width:16px;height:16px;"></i> Let's Talk</button>
+      </div>
+     </div>
+    </section><!-- FOOTER -->
+    <footer>
+     <div class="footer-inner">
+      <div class="footer-brand">
+       <h3 id="footerLogo">Akunosags</h3>
+       <p>Your trusted partner for professional services. We combine expertise with innovation to deliver results that matter.</p>
+      </div>
+      <div class="footer-col">
+       <h4>Navigation</h4>
+       <ul>
+        <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+        <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+        <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+        <li><a href="#" onclick="navigate('about');return false;">About Us</a></li>
+        <li><a href="#" onclick="navigate('contact');return false;">Contact</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Services</h4>
+       <ul>
+        {% for item in services %}
+        <li><a href="#">{{item.title}}</a></li>
+        {% endfor %}
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Contact</h4>
+       <ul>
+        <li><a href="#" id="footerEmail">info@elitepro.com</a></li>
+        <li><a href="#" id="footerPhone">+1 (555) 012-3456</a></li>
+        <li><a href="#" id="footerAddr">123 Business Ave, Suite 500, New York, NY 10001</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer-bottom">
+      © 2025 Akunosags Services. All rights reserved. | Designed with excellence.
+     </div>
+    </footer>
+   </div>
+  </div><!-- ===================== PAGE: SERVICES ===================== -->
+  <div class="page" id="page-services">
+   <nav>
+    <div class="nav-logo" onclick="navigate('home')">
+     AKUNO<span>Solar</span>
+    </div>
+    <ul class="nav-links">
+     <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+     <li><a href="#" class="active-link" onclick="navigate('services');return false;">Services</a></li>
+     <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+     <li><a href="#" onclick="navigate('about');return false;">About</a></li>
+     <li><a href="#" class="nav-cta" onclick="navigate('contact');return false;">Contact Us</a></li>
+    </ul><button class="hamburger" onclick="toggleMobile()" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+   </nav>
+   <div class="mobile-menu" id="mobileMenuServices">
+    <a href="#" onclick="navigate('home');document.getElementById('mobileMenuServices').classList.remove('open');return false;">Home</a> <a href="#" onclick="navigate('services');document.getElementById('mobileMenuServices').classList.remove('open');return false;">Services</a> <a href="#" onclick="navigate('gallery');document.getElementById('mobileMenuServices').classList.remove('open');return false;">Gallery</a> <a href="#" onclick="navigate('about');document.getElementById('mobileMenuServices').classList.remove('open');return false;">About</a> <a href="#" onclick="navigate('contact');document.getElementById('mobileMenuServices').classList.remove('open');return false;">Contact Us</a>
+   </div>
+   <div class="page-scroll">
+    <div class="page-hero">
+     <div class="page-hero-inner">
+      <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;" style="color:#64748B;text-decoration:none;">Home</a><i data-lucide="chevron-right" style="width:14px;height:14px;stroke:#64748B;"></i><span>Services</span>
+      </div>
+      <h1>Our Services</h1>
+      <p>Comprehensive solar solutions designed to help you harness clean energy efficiently, save costs, and power a sustainable future</p>
+     </div>
+    </div>
+    <section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="section-header">
+       <span class="section-eyebrow">Full Offering</span>
+       <h2 class="section-title">Everything You Need</h2>
+       <div class="gold-divider"></div>
+       <p class="section-subtitle">From solar panel installation, we cover every aspect of professional solar services</p>
+      </div>
+      <div class="services-full-grid">
+       
+       {% for item in services %}
+       <div class="service-full-card">
+        <div class="service-icon"><i data-lucide="trending-up"></i>
+        </div>
+        <h3>{{item.title}}</h3>
+        <p>{{item.description}}</p>
+       </div>
+       {% endfor %}
+      </div>
+     </div>
+    </section><!-- PROCESS -->
+    <section class="home-section" style="background:var(--white);">
+     <div class="home-section-inner">
+      <div class="section-header">
+       <span class="section-eyebrow">How We Work</span>
+       <h2 class="section-title">Our Proven Process</h2>
+       <div class="gold-divider"></div>
+      </div>
+      <div class="process-grid">
+       <div class="process-step">
+        <div class="step-num">
+         1
+        </div>
+        <h4>Discovery</h4>
+        <p>Deep-dive into your business context, challenges, and goals to establish a clear understanding of what success looks like.</p>
+       </div>
+       <div class="process-step">
+        <div class="step-num">
+         2
+        </div>
+        <h4>Strategy</h4>
+        <p>Develop a tailored roadmap with clear milestones, deliverables, and measurable outcomes aligned to your priorities.</p>
+       </div>
+       <div class="process-step">
+        <div class="step-num">
+         3
+        </div>
+        <h4>Execution</h4>
+        <p>Deploy our expert team to implement the agreed strategy with precision, discipline, and full transparency.</p>
+       </div>
+       <div class="process-step">
+        <div class="step-num">
+         4
+        </div>
+        <h4>Results</h4>
+        <p>Measure outcomes against targets, report on impact, and iterate for continuous improvement and sustained success.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- CTA -->
+    <section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="cta-banner">
+       <div>
+        <h2>Not Sure Where to Start?</h2>
+        <p>Book a free 30-minute consultation with one of our senior advisors.</p>
+       </div><button class="btn-navy" onclick="navigate('contact')"><i data-lucide="calendar" style="width:16px;height:16px;"></i> Book Consultation</button>
+      </div>
+     </div>
+    </section>
+    <footer>
+     <div class="footer-inner">
+      <div class="footer-brand">
+       <h3>ElitePro</h3>
+       <p>Your trusted partner for professional services excellence.</p>
+      </div>
+      <div class="footer-col">
+       <h4>Navigation</h4>
+       <ul>
+        <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+        <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+        <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+        <li><a href="#" onclick="navigate('about');return false;">About</a></li>
+        <li><a href="#" onclick="navigate('contact');return false;">Contact</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Services</h4>
+       <ul>
+        {% for item in services %}
+        <li><a href="#">{{item}}</a></li>
+        {% endfor %}
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Contact</h4>
+       <ul>
+        <li><a href="#" id="footerEmail">mayi.mausa@gmail.com</a></li>
+        <li><a href="#" id="footerPhone">+27 672 104 806</a></li>
+        <li><a href="#" id="footerAddr">Johannesburg, SA</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer-bottom">
+      © 2025 AKUNO Solar. All rights reserved. | Registered with Government of South Africa.
+     </div>
+    </footer>
+   </div>
+  </div><!-- ===================== PAGE: GALLERY ===================== -->
+  <div class="page" id="page-gallery">
+   <nav>
+    <div class="nav-logo" onclick="navigate('home')">
+     AKUNO<span>Solar</span>
+    </div>
+    <ul class="nav-links">
+     <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+     <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+     <li><a href="#" class="active-link" onclick="navigate('gallery');return false;">Gallery</a></li>
+     <li><a href="#" onclick="navigate('about');return false;">About</a></li>
+     <li><a href="#" class="nav-cta" onclick="navigate('contact');return false;">Contact Us</a></li>
+    </ul><button class="hamburger" onclick="toggleMobile2()" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+   </nav>
+   <div class="mobile-menu" id="mobileMenuGallery">
+    <a href="#" onclick="navigate('home');document.getElementById('mobileMenuGallery').classList.remove('open');return false;">Home</a> <a href="#" onclick="navigate('services');document.getElementById('mobileMenuGallery').classList.remove('open');return false;">Services</a> <a href="#" onclick="navigate('gallery');document.getElementById('mobileMenuGallery').classList.remove('open');return false;">Gallery</a> <a href="#" onclick="navigate('about');document.getElementById('mobileMenuGallery').classList.remove('open');return false;">About</a> <a href="#" onclick="navigate('contact');document.getElementById('mobileMenuGallery').classList.remove('open');return false;">Contact Us</a>
+   </div>
+   <div class="page-scroll">
+    <div class="page-hero">
+     <div class="page-hero-inner">
+      <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;" style="color:#64748B;text-decoration:none;">Home</a><i data-lucide="chevron-right" style="width:14px;height:14px;stroke:#64748B;"></i><span>Gallery</span>
+      </div>
+      <h1>Our Work Gallery</h1>
+      <p>A visual showcase of our projects, milestones, and the impactful outcomes we've delivered for clients worldwide.</p>
+     </div>
+    </div>
+    <section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="gallery-filters" id="galleryFilters">
+       <button class="filter-btn active" onclick="filterGallery('all',this)">All Projects</button> <button class="filter-btn" onclick="filterGallery('consulting',this)">Consulting</button> <button class="filter-btn" onclick="filterGallery('analytics',this)">Analytics</button> <button class="filter-btn" onclick="filterGallery('projects',this)">Projects</button> <button class="filter-btn" onclick="filterGallery('team',this)">Team</button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+     </div>
+    </section>
+    <footer>
+     <div class="footer-inner">
+      <div class="footer-brand">
+       <h3>Akunosags</h3>
+       <p>Powering the future with innovative, reliable and cost-effective solar energy solutions for homes, businesses and communities across South Africa.</p>
+      </div>
+      <div class="footer-col">
+       <h4>Navigation</h4>
+       <ul>
+        <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+        <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+        <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+        <li><a href="#" onclick="navigate('about');return false;">About Us</a></li>
+        <li><a href="#" onclick="navigate('contact');return false;">Contact</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Services</h4>
+       <ul>
+        <li><a href="#">Solar Panel Installation</a></li>
+        <li><a href="#">Energy Systems Design</a></li>
+        <li><a href="#">Plumbing &amp; Tiling</a></li>
+        <li><a href="#">Maintenance &amp; Renovations</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Contact</h4>
+       <ul>
+        <li><a href="#">info@elitepro.com</a></li>
+        <li><a href="#">+1 (555) 012-3456</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer-bottom">
+      © 2025 ElitePro Services. All rights reserved.
+     </div>
+    </footer>
+   </div>
+  </div><!-- ===================== PAGE: ABOUT ===================== -->
+  <div class="page" id="page-about">
+   <nav>
+    <div class="nav-logo" onclick="navigate('home')">
+     AKUNO<span>Solar</span>
+    </div>
+    <ul class="nav-links">
+     <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+     <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+     <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+     <li><a href="#" class="active-link" onclick="navigate('about');return false;">About</a></li>
+     <li><a href="#" class="nav-cta" onclick="navigate('contact');return false;">Contact Us</a></li>
+    </ul><button class="hamburger" onclick="toggleMobile3()" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+   </nav>
+   <div class="mobile-menu" id="mobileMenuAbout">
+    <a href="#" onclick="navigate('home');document.getElementById('mobileMenuAbout').classList.remove('open');return false;">Home</a> <a href="#" onclick="navigate('services');document.getElementById('mobileMenuAbout').classList.remove('open');return false;">Services</a> <a href="#" onclick="navigate('gallery');document.getElementById('mobileMenuAbout').classList.remove('open');return false;">Gallery</a> <a href="#" onclick="navigate('about');document.getElementById('mobileMenuAbout').classList.remove('open');return false;">About</a> <a href="#" onclick="navigate('contact');document.getElementById('mobileMenuAbout').classList.remove('open');return false;">Contact Us</a>
+   </div>
+   <div class="page-scroll">
+    <div class="page-hero">
+     <div class="page-hero-inner">
+      <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;" style="color:#64748B;text-decoration:none;">Home</a><i data-lucide="chevron-right" style="width:14px;height:14px;stroke:#64748B;"></i><span>About</span>
+      </div>
+      <h1>About Akunosags</h1>
+      <p>Built on a foundation of expertise, integrity, and a relentless pursuit of excellence for our clients.</p>
+     </div>
+    </div><!-- ABOUT STORY -->
+    <section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="about-grid">
+       <div class="about-image-block">
+        <div class="about-main-visual" style="position:relative;border-radius:16px;">
+         <div class="about-icon-big">
+          <img style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover;" src="{% static 'img/about.jpeg'%}" alt="Profile">
+         </div>
+         <div class="exp-badge"><strong>2010</strong><span>EST.</span>
+         </div>
+        </div>
+       </div>
+       <div>
+        <span class="section-eyebrow">Our Story</span>
+        <h2 class="section-title" style="text-align:left;margin-bottom:0.75rem;">A Legacy of Excellence</h2>
+        <div class="gold-divider" style="margin:0.75rem 0 1.5rem;"></div>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">We are a fully registered solar energy company in South Africa, committed to delivering innovative, reliable, and cost-effective solar solutions. Our mission is to empower homes, businesses, and communities by providing clean, sustainable energy that reduces electricity costs and minimizes environmental impact.</p>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">With a team of skilled professionals and a focus on quality and customer satisfaction, we design, install, and maintain solar systems that meet the unique energy needs of each client.</p>
+        <p style="color:var(--text-muted);line-height:1.8;font-size:0.95rem;">Whether it’s residential, commercial, or community projects, we strive to make solar energy accessible, efficient, and dependable for everyone.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,0.07);">
+         <div style="text-align:center;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);">500+</h3>
+          <p style="font-size:0.8rem;color:var(--text-muted);">Projects</p>
+         </div>
+         <div style="text-align:center;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);">42</h3>
+          <p style="font-size:0.8rem;color:var(--text-muted);">Specialists</p>
+         </div>
+         <div style="text-align:center;">
+          <h3 style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);">12</h3>
+          <p style="font-size:0.8rem;color:var(--text-muted);">Countries</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- VALUES -->
+    <section class="home-section" style="background:var(--white);">
+     <div class="home-section-inner">
+      <div class="section-header">
+       <span class="section-eyebrow">What Guides Us</span>
+       <h2 class="section-title">Our Core Values</h2>
+       <div class="gold-divider"></div>
+      </div>
+      <div class="values-grid">
+       <div class="value-card">
+        <div class="value-icon"><i data-lucide="star"></i>
+        </div>
+        <h3>Excellence</h3>
+        <p>We never settle for good enough. Excellence is our standard in every deliverable, relationship, and outcome.</p>
+       </div>
+       <div class="value-card">
+        <div class="value-icon"><i data-lucide="shield"></i>
+        </div>
+        <h3>Integrity</h3>
+        <p>We operate with complete transparency and honesty, building trust that lasts well beyond the engagement.</p>
+       </div>
+       <div class="value-card">
+        <div class="value-icon"><i data-lucide="zap"></i>
+        </div>
+        <h3>Innovation</h3>
+        <p>We continuously challenge convention, applying fresh thinking and emerging approaches to complex problems.</p>
+       </div>
+       <div class="value-card">
+        <div class="value-icon"><i data-lucide="users"></i>
+        </div>
+        <h3>Partnership</h3>
+        <p>We are true partners, not just vendors. Your success is our success, and we are invested in your journey.</p>
+       </div>
+       <div class="value-card">
+        <div class="value-icon"><i data-lucide="target"></i>
+        </div>
+        <h3>Impact</h3>
+        <p>Every action we take is measured against its real-world impact. Outcomes matter more than activities.</p>
+       </div>
+       <div class="value-card">
+        <div class="value-icon"><i data-lucide="heart"></i>
+        </div>
+        <h3>Care</h3>
+        <p>We genuinely care about our clients, our team, and the communities in which we operate.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- TEAM -->
+    <!--<section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="section-header">
+       <span class="section-eyebrow">Meet The Team</span>
+       <h2 class="section-title">The People Behind ElitePro</h2>
+       <div class="gold-divider"></div>
+      </div>
+      <div class="team-grid">
+       <div class="team-card">
+        <div class="team-avatar">
+         MJ
+        </div>
+        <h4>Michael Johnson</h4><span>Founder &amp; CEO</span>
+        <p>20 years of strategic leadership across Fortune 500 companies and startups alike.</p>
+       </div>
+       <div class="team-card">
+        <div class="team-avatar">
+         SC
+        </div>
+        <h4>Sarah Chen</h4><span>Chief Strategy Officer</span>
+        <p>Former McKinsey partner with deep expertise in organisational transformation.</p>
+       </div>
+       <div class="team-card">
+        <div class="team-avatar">
+         RP
+        </div>
+        <h4>Robert Patel</h4><span>Head of Analytics</span>
+        <p>Data science PhD with 12 years building enterprise intelligence platforms.</p>
+       </div>
+       <div class="team-card">
+        <div class="team-avatar">
+         LA
+        </div>
+        <h4>Lisa Anderson</h4><span>Director of Delivery</span>
+        <p>PMP certified with an impeccable record delivering 200+ projects globally.</p>
+       </div>
+      </div>
+     </div>
+    </section>-->
+    <!-- CTA -->
+    <section class="home-section" style="background:var(--white);">
+     <div class="home-section-inner">
+      <div class="cta-banner">
+       <div>
+        <h2>Want to Work With Us?</h2>
+        <p>Join the 500+ organisations who trust Akunosags to deliver results.</p>
+       </div><button class="btn-navy" onclick="navigate('contact')"><i data-lucide="arrow-right" style="width:16px;height:16px;"></i> Get in Touch</button>
+      </div>
+     </div>
+    </section>
+    <footer>
+     <div class="footer-inner">
+      <div class="footer-brand">
+       <h3>ElitePro</h3>
+       <p>Your trusted partner for professional services excellence.</p>
+      </div>
+      <div class="footer-col">
+       <h4>Navigation</h4>
+       <ul>
+        <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+        <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+        <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+        <li><a href="#" onclick="navigate('about');return false;">About</a></li>
+        <li><a href="#" onclick="navigate('contact');return false;">Contact</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Services</h4>
+       <ul>
+        <li><a href="#">Consulting</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Risk Management</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Contact</h4>
+       <ul>
+        <li><a href="#">info@elitepro.com</a></li>
+        <li><a href="#">+1 (555) 012-3456</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer-bottom">
+      © 2025 ElitePro Services. All rights reserved.
+     </div>
+    </footer>
+   </div>
+  </div><!-- ===================== PAGE: CONTACT ===================== -->
+  <div class="page" id="page-contact">
+   <nav>
+    <div class="nav-logo" onclick="navigate('home')">
+     AKUNO<span>Solar</span>
+    </div>
+    <ul class="nav-links">
+     <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+     <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+     <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+     <li><a href="#" onclick="navigate('about');return false;">About</a></li>
+     <li><a href="#" class="nav-cta active-link" onclick="navigate('contact');return false;">Contact Us</a></li>
+    </ul><button class="hamburger" onclick="toggleMobile4()" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+   </nav>
+   <div class="mobile-menu" id="mobileMenuContact">
+    <a href="#" onclick="navigate('home');document.getElementById('mobileMenuContact').classList.remove('open');return false;">Home</a> <a href="#" onclick="navigate('services');document.getElementById('mobileMenuContact').classList.remove('open');return false;">Services</a> <a href="#" onclick="navigate('gallery');document.getElementById('mobileMenuContact').classList.remove('open');return false;">Gallery</a> <a href="#" onclick="navigate('about');document.getElementById('mobileMenuContact').classList.remove('open');return false;">About</a> <a href="#" onclick="navigate('contact');document.getElementById('mobileMenuContact').classList.remove('open');return false;">Contact Us</a>
+   </div>
+   <div class="page-scroll">
+    <div class="page-hero">
+     <div class="page-hero-inner">
+      <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;" style="color:#64748B;text-decoration:none;">Home</a><i data-lucide="chevron-right" style="width:14px;height:14px;stroke:#64748B;"></i><span>Contact</span>
+      </div>
+      <h1>Get in Touch</h1>
+      <p>We'd love to hear from you. Reach out and our team will respond within one business day.</p>
+     </div>
+    </div>
+    <section class="home-section" style="background:var(--cream);">
+     <div class="home-section-inner">
+      <div class="contact-grid">
+       <!-- INFO -->
+       <div class="contact-info-card">
+        <h3>Contact Information</h3>
+        <p>Reach us through any of the channels below and we'll be delighted to help.</p>
+        <div class="contact-item">
+         <div class="contact-item-icon"><i data-lucide="map-pin"></i>
+         </div>
+         <div>
+          <h5>Address</h5>
+          <p id="contactAddress">Johannesburg, SA</p>
+         </div>
+        </div>
+        <div class="contact-item">
+         <div class="contact-item-icon"><i data-lucide="phone"></i>
+         </div>
+         <div>
+          <h5>Phone</h5>
+          <p id="contactPhone">+27 672 104 806</p>
+         </div>
+        </div>
+        <div class="contact-item">
+         <div class="contact-item-icon"><i data-lucide="mail"></i>
+         </div>
+         <div>
+          <h5>Email</h5>
+          <p id="contactEmail">mayi.mausa@gmail.com<br>
+            sales@akunosags.co.za</p>
+         </div>
+        </div>
+        <div class="contact-item">
+         <div class="contact-item-icon"><i data-lucide="clock"></i>
+         </div>
+         <div>
+          <h5>Business Hours</h5>
+          <p>Monday – Friday: 8AM – 6PM EST</p>
+         </div>
+        </div>
+        <div class="social-row">
+         <button class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin"></i></button> <button class="social-btn" aria-label="Twitter"><i data-lucide="twitter"></i></button> <button class="social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></button> <button class="social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></button>
+        </div>
+       </div><!-- FORM -->
+       <div class="contact-form-card">
+        <h3>Send Us a Message</h3>
+        <p>Fill in the form below and a member of our team will follow up promptly.</p>
+        <form id="contactForm" onsubmit="submitContactForm(event)">
+         <div class="form-row">
+          <div class="form-group">
+           <label for="firstName">First Name</label> <input type="text" id="firstName" name="firstName" placeholder="John" required>
+          </div>
+          <div class="form-group">
+           <label for="lastName">Last Name</label> <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+          </div>
+         </div>
+         <div class="form-group">
+          <label for="formEmail">Email Address</label> <input type="email" id="formEmail" name="formEmail" placeholder="john@company.com" required>
+         </div>
+         <div class="form-group">
+          <label for="formPhone">Phone Number</label> <input type="tel" id="formPhone" name="formPhone" placeholder="+265 (0) 993-344 416">
+         </div>
+         <div class="form-group">
+          <label for="service">Service of Interest</label> <select id="service" name="service">
+            <option value="">Select a service...</option> 
+            {% for item in services %}
+            <option>{{item.title}}</option> 
+            {% endfor %}
+            </select>
+         </div>
+         <div class="form-group">
+          <label for="message">Your Message</label> <textarea id="message" name="message" placeholder="Tell us about your project or challenge..." required></textarea>
+         </div><button type="submit" class="btn-gold" id="submitBtn" style="width:100%;justify-content:center;"> <i data-lucide="send" style="width:16px;height:16px;"></i> <span id="submitBtnText">Send Message</span> </button>
+        </form>
+        <div class="form-success" id="formSuccess">
+         <i data-lucide="check-circle"></i>
+         <h4>Message Received!</h4>
+         <p>Thank you for reaching out. A member of our team will be in touch within one business day.</p><button class="btn-gold" style="margin-top:1.25rem;" onclick="resetForm()">Send Another Message</button>
+        </div>
+       </div>
+      </div><!-- MAP + HOURS -->
+      <div class="map-hours-grid">
+       <div class="map-placeholder">
+        <div class="map-pin">
+         <i data-lucide="map-pin" style="width:40px;height:40px;stroke:var(--gold);display:block;margin:0 auto;"></i>
+         <p>123 Business Avenue, Suite 500<br>
+           New York, NY 10001</p>
+        </div>
+       </div>
+       <div class="hours-card">
+        <h4><i data-lucide="clock" style="width:16px;height:16px;display:inline;vertical-align:middle;margin-right:0.4rem;stroke:var(--gold);"></i> Office Hours</h4>
+        <div class="hours-row"><span>Monday</span><span>8:00 AM – 6:00 PM</span>
+        </div>
+        <div class="hours-row"><span>Tuesday</span><span>8:00 AM – 6:00 PM</span>
+        </div>
+        <div class="hours-row"><span>Wednesday</span><span>8:00 AM – 6:00 PM</span>
+        </div>
+        <div class="hours-row"><span>Thursday</span><span>8:00 AM – 6:00 PM</span>
+        </div>
+        <div class="hours-row"><span>Friday</span><span>8:00 AM – 5:00 PM</span>
+        </div>
+        <div class="hours-row closed"><span>Saturday</span><span>Closed</span>
+        </div>
+        <div class="hours-row closed"><span>Sunday</span><span>Closed</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <footer>
+     <div class="footer-inner">
+      <div class="footer-brand">
+       <h3>ElitePro</h3>
+       <p>Your trusted partner for professional services excellence.</p>
+      </div>
+      <div class="footer-col">
+       <h4>Navigation</h4>
+       <ul>
+        <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
+        <li><a href="#" onclick="navigate('services');return false;">Services</a></li>
+        <li><a href="#" onclick="navigate('gallery');return false;">Gallery</a></li>
+        <li><a href="#" onclick="navigate('about');return false;">About</a></li>
+        <li><a href="#" onclick="navigate('contact');return false;">Contact</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Services</h4>
+       <ul>
+        <li><a href="#">Consulting</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Risk Management</a></li>
+       </ul>
+      </div>
+      <div class="footer-col">
+       <h4>Contact</h4>
+       <ul>
+        <li><a href="#">info@elitepro.com</a></li>
+        <li><a href="#">+1 (555) 012-3456</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer-bottom">
+      © 2025 ElitePro Services. All rights reserved.
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script>
+  // ==================== NAVIGATION ====================
+  const pages = ['home','services','gallery','about','contact'];
+
+  function navigate(page) {
+    pages.forEach(p => {
+      const el = document.getElementById('page-' + p);
+      if (el) { el.classList.remove('active'); }
+    });
+    const target = document.getElementById('page-' + page);
+    if (target) {
+      target.classList.add('active');
+      // Scroll to top
+      const scroller = target.querySelector('.page-scroll');
+      if (scroller) scroller.scrollTop = 0;
+    }
+  }
+
+  // Hamburger for home
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+  function toggleMobile() { document.getElementById('mobileMenuServices').classList.toggle('open'); }
+  function toggleMobile2() { document.getElementById('mobileMenuGallery').classList.toggle('open'); }
+  function toggleMobile3() { document.getElementById('mobileMenuAbout').classList.toggle('open'); }
+  function toggleMobile4() { document.getElementById('mobileMenuContact').classList.toggle('open'); }
+
+  // ==================== GALLERY ====================
+
+  const galleryItems = {{ gallery_json|safe }};
+
+  let currentFilter = 'all';
+
+  function renderGallery(filter) {
+    const grid = document.getElementById('galleryGrid');
+    const filtered = filter === 'all' ? galleryItems : galleryItems.filter(i => i.category === filter);
+
+    // Selective update
+    const existingIds = new Set([...grid.children].map(el => el.dataset.itemId));
+    const newIds = new Set(filtered.map(i => String(i.id)));
+
+    // Remove items not in new set
+    [...grid.children].forEach(el => {
+      if (!newIds.has(el.dataset.itemId)) el.remove();
+    });
+
+    // Add or update items
+    filtered.forEach((item, idx) => {
+      let el = grid.querySelector(`[data-item-id="${item.id}"]`);
+      if (!el) {
+        el = document.createElement('div');
+        el.className = 'gallery-item';
+        el.dataset.itemId = String(item.id);
+        el.innerHTML = `
+  <div class="gallery-visual" style="
+      height:${item.height}px;
+      ${item.image 
+        ? `background:url('${item.image}') center/cover no-repeat;` 
+        : `background:linear-gradient(135deg,${item.color},${item.color}dd);`}
+  ">
+    ${
+      !item.image ? `
+      <div style="width:80px;height:80px;border-radius:50%;border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);">
+        <i data-lucide="${item.icon}" style="width:36px;height:36px;stroke:${item.accent};"></i>
+      </div>` : ''
+    }
+  </div>
+
+  <div class="gallery-overlay">
+    <div class="zoom-icon"><i data-lucide="zoom-in"></i></div>
+    <span>${item.title}</span>
+  </div>
+
+  <div class="gallery-label">${item.title}</div>
+`;
+        el.addEventListener('click', () => openLightbox(item));
+        grid.appendChild(el);
+      }
+    });
+
+    lucide.createIcons();
+  }
+
+  function filterGallery(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGallery(filter);
+  }
+
+  function openLightbox(item) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightboxTitle').textContent = item.title;
+    document.getElementById('lightboxDesc').textContent = item.desc;
+    document.getElementById('lightboxVisual').innerHTML = `
+  ${
+    item.image
+    ? `<img src="${item.image}" style="width:100%;height:280px;object-fit:cover;border-radius:10px;">`
+    : `
+    <div style="width:100%;height:280px;background:linear-gradient(135deg,${item.color},${item.color}cc);display:flex;align-items:center;justify-content:center;border-radius:10px;">
+      <i data-lucide="${item.icon}" style="width:48px;height:48px;stroke:${item.accent};"></i>
+    </div>`
+  }
+`;
+    lb.classList.add('open');
+    lucide.createIcons();
+  }
+
+  document.getElementById('lightboxClose').addEventListener('click', () => {
+    document.getElementById('lightbox').classList.remove('open');
+  });
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+
+  // ==================== CONTACT FORM ====================
+function submitContactForm(e) {
+  e.preventDefault();
+
+  const form = document.getElementById('contactForm');
+  const formData = new FormData(form);
+
+  fetch('/contact/', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'X-CSRFToken': getCSRFToken()
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Message sent successfully!");
+    form.reset();
+  })
+  .catch(err => {
+    alert("Error sending message");
+  });
+}
+
+function getCSRFToken() {
+  return document.cookie.split('; ')
+    .find(row => row.startsWith('csrftoken'))
+    ?.split('=')[1];
+}
+// ==================== ELEMENT SDK ====================
+  const defaultConfig = {
+    company_name: 'AKUNO',
+    tagline: 'the best choice',
+    main_headline: 'POWERING THE FUTURE WITH SOLAR ENERGY',
+    about_text: 'We are a solar energy company registered with government of South Africa. As a solar energy company, we are dedicated to providing innovative, reliable and cost-effective solutions for homes, businesses and communities.',
+    contact_email_1: 'mayi.mausa@gmail.com',
+    contact_email_2: 'sales@akunosags.co.za',
+    contact_phone: '+27672104806',
+    contact_address: 'Johannesburg, SA',
+    social_handle: '@akunosolaraccessories',
+    primary_color: '#F4B400',
+    bg_color: '#1F3C88',
+    text_color: '#F8FAFC',
+    surface_color: '#2E4F9E',
+    accent_color: '#FFFFFF',
+    font_family: 'Playfair Display',
+    font_size: 16,
+  };
+
+  function applyConfig(config) {
+    const c = config || defaultConfig;
+
+    // Company name
+    const cname = c.company_name || defaultConfig.company_name;
+    document.querySelectorAll('.nav-logo').forEach(el => {
+      const parts = cname.split(' ');
+      if (parts.length > 1) {
+        el.innerHTML = parts[0] + '<span>' + parts.slice(1).join(' ') + '</span>';
+      } else {
+        el.textContent = cname;
+      }
+    });
+    document.querySelectorAll('.footer-brand h3').forEach(el => el.textContent = cname);
+    if (document.getElementById('footerLogo')) document.getElementById('footerLogo').textContent = cname;
+
+    // Contact info
+    const email = c.contact_email || defaultConfig.contact_email;
+    const phone = c.contact_phone || defaultConfig.contact_phone;
+    const addr = c.contact_address || defaultConfig.contact_address;
+    if (document.getElementById('contactEmail')) document.getElementById('contactEmail').textContent = email;
+    if (document.getElementById('contactPhone')) document.getElementById('contactPhone').textContent = phone;
+    if (document.getElementById('contactAddress')) document.getElementById('contactAddress').textContent = addr;
+    if (document.getElementById('footerEmail')) document.getElementById('footerEmail').textContent = email;
+    if (document.getElementById('footerPhone')) document.getElementById('footerPhone').textContent = phone;
+    if (document.getElementById('footerAddr')) document.getElementById('footerAddr').textContent = addr;
+
+    // Hero
+    if (document.getElementById('heroSubtitle')) {
+      document.getElementById('heroSubtitle').textContent = c.tagline || defaultConfig.tagline;
+    }
+
+    // Colors via CSS variables
+    const root = document.documentElement;
+    root.style.setProperty('--gold', c.primary_color || defaultConfig.primary_color);
+    root.style.setProperty('--navy', c.bg_color || defaultConfig.bg_color);
+    root.style.setProperty('--cream', c.text_color || defaultConfig.text_color);
+    root.style.setProperty('--navy-mid', c.surface_color || defaultConfig.surface_color);
+
+    // Font
+    const ff = c.font_family || defaultConfig.font_family;
+    const fs = c.font_size || defaultConfig.font_size;
+    document.querySelectorAll('h1,h2,h3,h4').forEach(el => {
+      el.style.fontFamily = `'${ff}', 'Playfair Display', serif`;
+      const tag = el.tagName;
+      if (tag === 'H1') el.style.fontSize = `${fs * 2}px`;
+      else if (tag === 'H2') el.style.fontSize = `${fs * 1.6}px`;
+      else if (tag === 'H3') el.style.fontSize = `${fs * 1.2}px`;
+      else el.style.fontSize = `${fs}px`;
+    });
+  }
+
+  if (window.elementSdk) {
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.bg_color || defaultConfig.bg_color, set: (v) => { config.bg_color = v; window.elementSdk.setConfig({ bg_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => { config.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } },
+          { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } },
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['company_name', config.company_name || defaultConfig.company_name],
+        ['tagline', config.tagline || defaultConfig.tagline],
+        ['main_headline', config.main_headline || defaultConfig.main_headline],
+        ['about_text', config.about_text || defaultConfig.about_text],
+        ['contact_email_1', config.contact_email_1 || defaultConfig.contact_email_1],
+        ['contact_email_2', config.contact_email_2 || defaultConfig.contact_email_2],
+        ['contact_phone', config.contact_phone || defaultConfig.contact_phone],
+        ['contact_address', config.contact_address || defaultConfig.contact_address],
+        ['social_handle', config.social_handle || defaultConfig.social_handle],
+      ])
+    });
+  }
+
+  // ==================== INIT ====================
+  document.addEventListener('DOMContentLoaded', function() {
+    renderGallery('all');
+    lucide.createIcons();
+  });
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9de65f9b626d73cd',t:'MTc3Mzg1OTMwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

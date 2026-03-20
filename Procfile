@@ -1,0 +1,1 @@
+web: gunicorn akuno_project.wsgi
