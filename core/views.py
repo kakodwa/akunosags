@@ -3,16 +3,6 @@ from .models import Service, Gallery, Testimonial
 from .models import ContactMessage
 import json
 
-def home(request):
-    services = Service.objects.all()
-    gallery = Gallery.objects.all()
-    testimonials = Testimonial.objects.all()
-
-    return render(request, "akuno/akuno.html", {
-        "services": services,
-        "gallery": gallery,
-        "testimonials": testimonials
-    })
 
 def home(request):
     gallery = Gallery.objects.all()
