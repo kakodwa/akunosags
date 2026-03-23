@@ -278,7 +278,7 @@
     .page-hero { background:var(--navy); padding: 5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
     .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 80%, rgba(201,168,76,0.1) 0%, transparent 60%); }
     .page-hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
-    .page-hero h1 { color: var(--white); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+    .page-hero h1 { color: var(--black); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
     .page-hero p { color: #94A3B8; font-size: 1.05rem; line-height: 1.7; }
     .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.25rem; font-size: 0.8rem; color: #64748B; }
     .breadcrumb span { color: var(--gold); }
@@ -463,7 +463,7 @@
   <div class="page active" id="page-home">
    <nav>
     <div class="nav-logo" onclick="navigate('home')">
-     AKUNO<span>Solar</span>
+      <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
     </div>
     <ul class="nav-links" id="navLinks">
      <li><a href="#" class="active-link" onclick="navigate('home');return false;">Home</a></li>
@@ -620,7 +620,7 @@
         <p>{{item.message}}</p>
         <div class="testimonial-author">
          <div class="avatar">
-             <img style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover;" src="{% static 'img/about.jpeg'%}" alt="Profile">
+             <img style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover;" src="{% static 'img/profile.jfif'%}" alt="Profile">
            </div>
          <div class="author-info">
           <h5>{{item.name}}</h5><span>{{item.role}}</span>
@@ -644,7 +644,9 @@
     <footer>
      <div class="footer-inner">
       <div class="footer-brand">
-       <h3 id="footerLogo">Akunosags</h3>
+       <h3 id="footerLogo">
+         <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
+       </h3>
        <p>Your trusted partner for professional services. We combine expertise with innovation to deliver results that matter.</p>
       </div>
       <div class="footer-col">
@@ -668,7 +670,7 @@
       <div class="footer-col">
        <h4>Contact</h4>
        <ul>
-        <li><a href="#" id="footerEmail">info@elitepro.com</a></li>
+        <li><a href="#" id="footerEmail">info@akunosags.com</a></li>
         <li><a href="#" id="footerPhone">+1 (555) 012-3456</a></li>
         <li><a href="#" id="footerAddr">123 Business Ave, Suite 500, New York, NY 10001</a></li>
        </ul>
@@ -683,7 +685,7 @@
   <div class="page" id="page-services">
    <nav>
     <div class="nav-logo" onclick="navigate('home')">
-     AKUNO<span>Solar</span>
+     <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
     </div>
     <ul class="nav-links">
      <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
@@ -778,7 +780,7 @@
     <footer>
      <div class="footer-inner">
       <div class="footer-brand">
-       <h3>ElitePro</h3>
+       <h3><img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;"></h3>
        <p>Your trusted partner for professional services excellence.</p>
       </div>
       <div class="footer-col">
@@ -817,7 +819,7 @@
   <div class="page" id="page-gallery">
    <nav>
     <div class="nav-logo" onclick="navigate('home')">
-     AKUNO<span>Solar</span>
+     <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
     </div>
     <ul class="nav-links">
      <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
@@ -850,7 +852,9 @@
     <footer>
      <div class="footer-inner">
       <div class="footer-brand">
-       <h3>Akunosags</h3>
+       <h3>
+         <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
+       </h3>
        <p>Powering the future with innovative, reliable and cost-effective solar energy solutions for homes, businesses and communities across South Africa.</p>
       </div>
       <div class="footer-col">
@@ -875,13 +879,13 @@
       <div class="footer-col">
        <h4>Contact</h4>
        <ul>
-        <li><a href="#">info@elitepro.com</a></li>
+        <li><a href="#">info@akunosags.com</a></li>
         <li><a href="#">+1 (555) 012-3456</a></li>
        </ul>
       </div>
      </div>
      <div class="footer-bottom">
-      © 2025 ElitePro Services. All rights reserved.
+      © 2025 Akunosags Services. All rights reserved.
      </div>
     </footer>
    </div>
@@ -889,7 +893,7 @@
   <div class="page" id="page-about">
    <nav>
     <div class="nav-logo" onclick="navigate('home')">
-     AKUNO<span>Solar</span>
+     <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
     </div>
     <ul class="nav-links">
      <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
@@ -1048,7 +1052,9 @@
     <footer>
      <div class="footer-inner">
       <div class="footer-brand">
-       <h3>ElitePro</h3>
+       <h3>
+        <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
+       </h3>
        <p>Your trusted partner for professional services excellence.</p>
       </div>
       <div class="footer-col">
@@ -1072,13 +1078,13 @@
       <div class="footer-col">
        <h4>Contact</h4>
        <ul>
-        <li><a href="#">info@elitepro.com</a></li>
+        <li><a href="#">info@akunosags.com</a></li>
         <li><a href="#">+1 (555) 012-3456</a></li>
        </ul>
       </div>
      </div>
      <div class="footer-bottom">
-      © 2025 ElitePro Services. All rights reserved.
+      © 2025 Akunosags Services. All rights reserved.
      </div>
     </footer>
    </div>
@@ -1086,7 +1092,7 @@
   <div class="page" id="page-contact">
    <nav>
     <div class="nav-logo" onclick="navigate('home')">
-     AKUNO<span>Solar</span>
+     <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
     </div>
     <ul class="nav-links">
      <li><a href="#" onclick="navigate('home');return false;">Home</a></li>
@@ -1220,7 +1226,9 @@
     <footer>
      <div class="footer-inner">
       <div class="footer-brand">
-       <h3>ElitePro</h3>
+       <h3>
+         <img src="{% static 'img/logo.jpeg' %}" style="height:45px; width:auto;">
+       </h3>
        <p>Your trusted partner for professional services excellence.</p>
       </div>
       <div class="footer-col">
@@ -1244,13 +1252,13 @@
       <div class="footer-col">
        <h4>Contact</h4>
        <ul>
-        <li><a href="#">info@elitepro.com</a></li>
+        <li><a href="#">info@akunosags.com</a></li>
         <li><a href="#">+1 (555) 012-3456</a></li>
        </ul>
       </div>
      </div>
      <div class="footer-bottom">
-      © 2025 ElitePro Services. All rights reserved.
+      © 2025 Akunosags Services. All rights reserved.
      </div>
     </footer>
    </div>
