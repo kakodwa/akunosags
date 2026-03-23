@@ -1,1 +1,1 @@
-web: gunicorn akuno_project.wsgi
+web: gunicorn akuno_project.wsgi:application
