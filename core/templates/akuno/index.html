@@ -1,0 +1,121 @@
+{% extends 'akuno/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+   <section id="page-home" class="page-section active pt-20">
+    <!-- Hero Section -->
+    <div class="hero-pattern min-h-[90%] flex items-center relative overflow-hidden">
+     <div class="absolute inset-0">
+      <div class="absolute top-20 right-10 w-64 h-64 rounded-full bg-[#F4B400] opacity-10 blur-3xl"></div>
+      <div class="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-[#F4B400] opacity-5 blur-3xl"></div>
+     </div>
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+       <div class="text-white">
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 animate-fade-in-up">
+         <span class="w-2 h-2 bg-[#F4B400] rounded-full"></span> <span class="text-sm font-medium">Registered Solar Company in South Africa</span>
+        </div>
+        <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up delay-100">Powering Your Future with <span class="text-[#F4B400]">Clean Energy</span></h1>
+        <p id="hero-subtitle" class="text-lg md:text-xl text-white/80 mb-8 leading-relaxed animate-fade-in-up delay-200">Innovative, reliable, and cost-effective solar solutions for homes, businesses, and communities across South Africa.</p>
+        <div class="flex flex-wrap gap-4 animate-fade-in-up delay-300">
+         <button class="btn-primary px-8 py-4 rounded-full text-white font-semibold flex items-center gap-2"> <i data-lucide="sun" class="w-5 h-5"></i> Start Your Solar Journey </button> <button class="bg-white/10 backdrop-blur-sm border border-white/30 px-8 py-4 rounded-full text-white font-semibold hover:bg-white/20 transition-all flex items-center gap-2"> <i data-lucide="play-circle" class="w-5 h-5"></i> Watch Video </button>
+        </div><!-- Stats -->
+        <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/20 animate-fade-in-up delay-400">
+         <div>
+          <div class="text-3xl font-bold text-[#F4B400]">
+           500+
+          </div>
+          <div class="text-sm text-white/70">
+           Projects Completed
+          </div>
+         </div>
+         <div>
+          <div class="text-3xl font-bold text-[#F4B400]">
+           98%
+          </div>
+          <div class="text-sm text-white/70">
+           Happy Customers
+          </div>
+         </div>
+         <div>
+          <div class="text-3xl font-bold text-[#F4B400]">
+           15+
+          </div>
+          <div class="text-sm text-white/70">
+           Years Experience
+          </div>
+         </div>
+        </div>
+       </div><!-- Hero Image/Illustration -->
+       <div class="relative hidden lg:block">
+        <div class="relative w-full aspect-square">
+         <svg viewbox="0 0 400 400" class="w-full h-full">
+          <!-- Solar Panel --> <rect x="100" y="150" width="200" height="150" rx="8" fill="#1F3C88" stroke="#F4B400" stroke-width="3" /> <line x1="100" y1="200" x2="300" y2="200" stroke="#3D5FA8" stroke-width="2" /> <line x1="100" y1="250" x2="300" y2="250" stroke="#3D5FA8" stroke-width="2" /> <line x1="150" y1="150" x2="150" y2="300" stroke="#3D5FA8" stroke-width="2" /> <line x1="200" y1="150" x2="200" y2="300" stroke="#3D5FA8" stroke-width="2" /> <line x1="250" y1="150" x2="250" y2="300" stroke="#3D5FA8" stroke-width="2" /> <!-- Sun --> <circle cx="320" cy="80" r="40" fill="#F4B400" /> <g class="sun-rays" style="transform-origin: 320px 80px;">
+           <rect x="316" y="20" width="8" height="20" rx="4" fill="#F4B400" />
+           <rect x="316" y="120" width="8" height="20" rx="4" fill="#F4B400" />
+           <rect x="260" y="76" width="20" height="8" rx="4" fill="#F4B400" />
+           <rect x="360" y="76" width="20" height="8" rx="4" fill="#F4B400" />
+          </g> <!-- House --> <path d="M50 350 L50 280 L100 240 L150 280 L150 350 Z" fill="#2E4F9E" stroke="#1F3C88" stroke-width="2" /> <rect x="70" y="300" width="30" height="50" fill="#F4B400" /> <rect x="110" y="290" width="20" height="25" fill="#87CEEB" /> <!-- Energy Lines --> <path d="M300 175 Q330 150 320 100" stroke="#F4B400" stroke-width="3" fill="none" stroke-dasharray="8 4">
+           <animate attributename="stroke-dashoffset" from="0" to="-24" dur="1s" repeatcount="indefinite" />
+          </path> <path d="M150 300 Q100 320 100 280" stroke="#00C853" stroke-width="3" fill="none" stroke-dasharray="8 4">
+           <animate attributename="stroke-dashoffset" from="0" to="-24" dur="1s" repeatcount="indefinite" />
+          </path>
+         </svg>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Features Section -->
+    <div class="py-20 bg-white">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+       <span class="inline-block px-4 py-2 bg-[#F4B400]/10 text-[#F09700] font-semibold rounded-full text-sm mb-4">Why Choose Us</span>
+       <h2 class="text-3xl md:text-4xl font-bold text-[#1F3C88] mb-4">Leading Solar Solutions Provider</h2>
+       <p class="text-[#647A8F] max-w-2xl mx-auto">We deliver comprehensive solar energy solutions tailored to your specific needs</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+       <div class="card-hover bg-[#F8FAFC] p-8 rounded-2xl text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-[#F4B400] to-[#F09700] rounded-2xl flex items-center justify-center mx-auto mb-6">
+         <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1F3C88] mb-3">Fully Registered</h3>
+        <p class="text-[#647A8F]">Certified and compliant with all South African energy regulations</p>
+       </div>
+       <div class="card-hover bg-[#F8FAFC] p-8 rounded-2xl text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-[#F4B400] to-[#F09700] rounded-2xl flex items-center justify-center mx-auto mb-6">
+         <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1F3C88] mb-3">Cost-Effective</h3>
+        <p class="text-[#647A8F]">Reduce your electricity bills significantly with our solutions</p>
+       </div>
+       <div class="card-hover bg-[#F8FAFC] p-8 rounded-2xl text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-[#F4B400] to-[#F09700] rounded-2xl flex items-center justify-center mx-auto mb-6">
+         <i data-lucide="leaf" class="w-8 h-8 text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1F3C88] mb-3">Eco-Friendly</h3>
+        <p class="text-[#647A8F]">Clean, sustainable energy that minimizes environmental impact</p>
+       </div>
+       <div class="card-hover bg-[#F8FAFC] p-8 rounded-2xl text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-[#F4B400] to-[#F09700] rounded-2xl flex items-center justify-center mx-auto mb-6">
+         <i data-lucide="headphones" class="w-8 h-8 text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold text-[#1F3C88] mb-3">Expert Support</h3>
+        <p class="text-[#647A8F]">Dedicated team for installation and ongoing maintenance</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- CTA Section -->
+    <div class="py-20 gradient-bg relative overflow-hidden">
+     <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#F4B400] opacity-10 blur-3xl"></div>
+     </div>
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Go Solar?</h2>
+      <p class="text-white/80 text-lg mb-8">Get a free consultation and quote for your home or business today</p><button class="btn-primary px-10 py-4 rounded-full text-white font-semibold text-lg"> Request Free Quote </button>
+     </div>
+    </div>
+   </section>
+
+  {% endblock %}

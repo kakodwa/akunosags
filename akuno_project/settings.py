@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -18,6 +19,13 @@ DEBUG = os.environ.get("DEBUG") == "True"
 ALLOWED_HOSTS = ['*']
 
 
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
+)
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -28,8 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    
     'core',
+
+    'cloudinary',
+    'cloudinary_storage',
+  
 ]
 
 MIDDLEWARE = [

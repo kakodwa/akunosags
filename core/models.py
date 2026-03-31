@@ -1,18 +1,19 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Gallery(models.Model):
     CATEGORY_CHOICES = [
-        ('consulting', 'Consulting'),
-        ('analytics', 'Analytics'),
-        ('projects', 'Projects'),
-        ('team', 'Team'),
+        ('Accessories', 'Accessories'),
+        ('System Design', 'System Design'),
+        ('Site Assessment', 'Site Assessment'),
+        ('Installation', 'Installation'),
     ]
 
     title = models.CharField(max_length=200)
     description = models.TextField()
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
-    image = models.ImageField(upload_to='gallery/', blank=True, null=True)
+    image = CloudinaryField('gallery', blank=True, null=True)
 
     # UI fields (for your design)
     icon = models.CharField(max_length=50, default='image')
@@ -27,6 +28,7 @@ class Gallery(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
+    image = CloudinaryField('services', blank=True, null=True)
     icon = models.CharField(max_length=50, default='zap')
 
     def __str__(self):
@@ -41,6 +43,10 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def initials(self):
+        return "".join([n[0].upper() for n in self.name.split() if n])
 
 
 class ContactMessage(models.Model):

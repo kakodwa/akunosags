@@ -1,0 +1,123 @@
+{% extends 'akuno/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+   <section id="page-services" class="page-section pt-20">
+    <!-- Services Hero -->
+    <div class="gradient-bg py-20">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center text-white">
+       <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
+       <p class="text-xl text-white/80 max-w-3xl mx-auto">Comprehensive solar solutions for residential, commercial, and community projects</p>
+      </div>
+     </div>
+    </div><!-- Main Services -->
+    <div class="py-20 bg-white">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8">
+       <!-- Residential -->
+
+       {% for item in services %}
+       <div class="bg-[#F8FAFC] rounded-3xl overflow-hidden card-hover">
+        <div class="h-48 bg-gradient-to-br from-[#1F3C88] to-[#3D5FA8] flex items-center justify-center">
+           <img src="{{ item.image.url }}" class="h-full w-full object-cover">
+        </div>
+        <div class="p-8">
+         <h3 class="text-2xl font-bold text-[#1F3C88] mb-4">{{item.title}}</h3>
+         <p class="text-[#647A8F] mb-6">{{item.description}}</p>
+        <button onclick="window.location.href='/contact'" class="btn-primary w-full py-3 rounded-full text-white font-semibold">Get Quote</button>
+        </div>
+       </div>
+       {% endfor %}
+      </div>
+     </div>
+    </div>
+
+    <!-- Additional Services -->
+    <!--
+    <div class="py-20 bg-[#F8FAFC]">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+       <span class="inline-block px-4 py-2 bg-[#F4B400]/10 text-[#F09700] font-semibold rounded-full text-sm mb-4">Additional Services</span>
+       <h2 class="text-3xl md:text-4xl font-bold text-[#1F3C88]">Complete Solar Support</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+       <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-14 h-14 bg-[#1F3C88] rounded-2xl flex items-center justify-center mx-auto mb-4">
+         <i data-lucide="clipboard-check" class="w-7 h-7 text-white"></i>
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">Site Assessment</h3>
+        <p class="text-[#647A8F] text-sm">Free evaluation of your property's solar potential</p>
+       </div>
+       <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-14 h-14 bg-[#1F3C88] rounded-2xl flex items-center justify-center mx-auto mb-4">
+         <i data-lucide="pencil-ruler" class="w-7 h-7 text-white"></i>
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">System Design</h3>
+        <p class="text-[#647A8F] text-sm">Custom-designed systems for optimal performance</p>
+       </div>
+       <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-14 h-14 bg-[#1F3C88] rounded-2xl flex items-center justify-center mx-auto mb-4">
+         <i data-lucide="wrench" class="w-7 h-7 text-white"></i>
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">Installation</h3>
+        <p class="text-[#647A8F] text-sm">Professional installation by certified technicians</p>
+       </div>
+       <div class="bg-white p-6 rounded-2xl text-center card-hover">
+        <div class="w-14 h-14 bg-[#1F3C88] rounded-2xl flex items-center justify-center mx-auto mb-4">
+         <i data-lucide="settings" class="w-7 h-7 text-white"></i>
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">Maintenance</h3>
+        <p class="text-[#647A8F] text-sm">Ongoing support and system maintenance</p>
+       </div>
+      </div>
+     </div>
+    </div>-->
+
+    <!-- Process -->
+    <div class="py-20 bg-white">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+       <span class="inline-block px-4 py-2 bg-[#F4B400]/10 text-[#F09700] font-semibold rounded-full text-sm mb-4">Our Process</span>
+       <h2 class="text-3xl md:text-4xl font-bold text-[#1F3C88]">How We Work</h2>
+      </div>
+      <div class="grid md:grid-cols-4 gap-8">
+       <div class="text-center relative">
+        <div class="w-16 h-16 bg-[#F4B400] rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
+         1
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">Consultation</h3>
+        <p class="text-[#647A8F] text-sm">Discuss your energy needs and goals</p>
+        <div class="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-[#F4B400]/30"></div>
+       </div>
+       <div class="text-center relative">
+        <div class="w-16 h-16 bg-[#F4B400] rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
+         2
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">Site Survey</h3>
+        <p class="text-[#647A8F] text-sm">Assess your property and requirements</p>
+        <div class="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-[#F4B400]/30"></div>
+       </div>
+       <div class="text-center relative">
+        <div class="w-16 h-16 bg-[#F4B400] rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
+         3
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">Design &amp; Quote</h3>
+        <p class="text-[#647A8F] text-sm">Custom solution with transparent pricing</p>
+        <div class="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-[#F4B400]/30"></div>
+       </div>
+       <div class="text-center">
+        <div class="w-16 h-16 bg-[#F4B400] rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
+         4
+        </div>
+        <h3 class="font-bold text-[#1F3C88] mb-2">Installation</h3>
+        <p class="text-[#647A8F] text-sm">Professional setup and activation</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   {% endblock %}

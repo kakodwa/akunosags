@@ -14,3 +14,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'akuno_project.settings')
 
 application = get_wsgi_application()
+
+#Akunosags
+#Admin0309
