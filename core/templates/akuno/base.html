@@ -165,7 +165,8 @@
       </div><!-- CTA Button -->
       <div class="hidden md:block">
        <button onclick="window.location.href='/contact'" class="btn-primary px-6 py-3 rounded-full text-white font-semibold flex items-center gap-2"> <i data-lucide="phone" class="w-4 h-4"></i> Get Quote </button>
-      </div><!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden p-2 text-[#1F3C88]"> <i data-lucide="menu" class="w-6 h-6"></i> </button>
+      </div><!-- Mobile Menu Button --> 
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-[#1F3C88]"> <i data-lucide="menu" class="w-6 h-6"></i> </button>
      </div>
     </div><!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu fixed inset-0 top-20 bg-white z-40 md:hidden">
@@ -223,14 +224,14 @@
       <div>
        <h3 class="font-bold text-lg mb-6">Contact Info</h3>
        <ul class="space-y-4">
-        <li class="flex items-center gap-3 text-white/70"><i data-lucide="map-pin" class="w-5 h-5 text-[#F4B400]"></i> Lilongwe,Malawi</li>
-        <li class="flex items-center gap-3 text-white/70"><i data-lucide="phone" class="w-5 h-5 text-[#F4B400]"></i> <span id="footer-phone">+265 999 22 07 20</span></li>
+        <li class="flex items-center gap-3 text-white/70"><i data-lucide="map-pin" class="w-5 h-5 text-[#F4B400]"></i> Mangochi,Malawi</li>
+        <li class="flex items-center gap-3 text-white/70"><i data-lucide="phone" class="w-5 h-5 text-[#F4B400]"></i> <span id="footer-phone">+27 82 534 8822 <br> +265 999 22 07 20</span></li>
         <li class="flex items-center gap-3 text-white/70"><i data-lucide="mail" class="w-5 h-5 text-[#F4B400]"></i> <span id="footer-email">info@akunosags.com</span></li>
        </ul>
       </div>
      </div>
      <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-white/50 text-sm">© 2024 SunPower Solar Solutions. All rights reserved.</p>
+      <p class="text-white/50 text-sm">© 2026 SunPower Solar Solutions. All rights reserved.</p>
       <div class="flex gap-6 text-sm">
        <a href="#" class="text-white/50 hover:text-white transition-colors">Privacy Policy</a> <a href="#" class="text-white/50 hover:text-white transition-colors">Terms of Service</a>
       </div>
@@ -258,6 +259,45 @@
 
     // Initialize Lucide icons
     lucide.createIcons();
+
+
+      // Navigation functionality
+    function initNavigation() {
+      const navLinks = document.querySelectorAll('[data-page]');
+      const pageSections = document.querySelectorAll('.page-section');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetPage = link.getAttribute('data-page');
+          
+          // Update active states
+          navLinks.forEach(l => l.classList.remove('active'));
+          document.querySelectorAll(`[data-page="${targetPage}"]`).forEach(l => l.classList.add('active'));
+          
+          // Show target page
+          pageSections.forEach(section => {
+            section.classList.remove('active');
+            if (section.id === `page-${targetPage}`) {
+              section.classList.add('active');
+            }
+          });
+          
+          // Close mobile menu
+          mobileMenu.classList.remove('open');
+          
+          // Scroll to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      // Mobile menu toggle
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+      });
+    }
 
 
 
